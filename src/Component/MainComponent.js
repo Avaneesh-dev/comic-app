@@ -82,7 +82,7 @@ async function query(data) {
       <div className="row mt-4">
         {comics.map((comic, index) => (
           <div key={index} className="col">
-            <img src={JSON.parse(comic.blob)} alt={`Comic ${index + 1}`} className="img-fluid" />
+            <img src={comic.substring(5)} alt={`Comic ${index + 1}`} className="img-fluid" />
           </div>
         ))}
       </div>
