@@ -5,7 +5,7 @@ const MainComponent = () => {
   const [loading, setLoading] = useState(false);
   const [comics, setComics] = useState([]);
   const [error, setError] = useState(null);
-  console.log(comics);
+//   console.log(comics);
 //   console.log(inputs);
 
 async function query(data) {
@@ -29,9 +29,10 @@ async function query(data) {
       setLoading(true);
       const data = { "inputs": input };
       const response = await query(data);
+      console.log(response); // log the blob content
       setComics((prevComics) => {
         const newComics = [...prevComics];
-        newComics[index] = URL.createObjectURL(response); // Assuming the API directly returns the image blob
+        newComics[index] = response; // Assuming the API directly returns the image blob
         return newComics;
       });
     } catch (error) {
@@ -44,8 +45,7 @@ async function query(data) {
   const handleSubmit = async (e) => {
     e.preventDefault();    
     for (let i = 0; i < inputs.length; i++) {
-      await fetchComic(inputs[i], i);
-        // Use image
+      await fetchComic(inputs[i], i)
     }
   };
 
@@ -82,7 +82,7 @@ async function query(data) {
       <div className="row mt-4">
         {comics.map((comic, index) => (
           <div key={index} className="col">
-            <img src={comic.substring(5)} alt={`Comic ${index + 1}`} className="img-fluid" />
+            <img src={comic} alt={`Comic ${index + 1}`} className="img-fluid" />
           </div>
         ))}
       </div>
